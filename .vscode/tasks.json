@@ -1,0 +1,26 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build CLI (tsc)",
+      "type": "shell",
+      "command": "npm run build",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run tree-me on ./src",
+      "type": "shell",
+      "command": "npx ts-node src/index.ts ./src --tree --format mdx",
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Link CLI globally",
+      "type": "shell",
+      "command": "npm link",
+      "group": "build",
+      "problemMatcher": []
+    }
+  ]
+}
