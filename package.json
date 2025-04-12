@@ -1,6 +1,6 @@
 {
   "name": "tree-me",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Generate a visual tree and GitHub-style link list for any project folder — exports to clean MDX.",
   "bin": {
     "tree-me": "./dist/index.js"
