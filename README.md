@@ -1,4 +1,4 @@
-# tree-links
+# tree-me ![npm version](https://img.shields.io/npm/v/tree-me)
 
 A minimal, TypeScript-powered CLI tool that recursively walks a directory tree, generates relative file paths, and builds sharable GitHub-style links for every file. Perfect for documenting, linking, or sharing the structure of your projects.
 
@@ -19,7 +19,7 @@ A minimal, TypeScript-powered CLI tool that recursively walks a directory tree, 
 ## 📦 Installation
 
 ```bash
-npm install -g tree-links
+npm install -g tree-me
 ```
 
 ---
@@ -27,7 +27,7 @@ npm install -g tree-links
 ## 💻 Usage
 
 ```bash
-tree-links [directory] [baseUrl]
+tree-me [directory] [baseUrl]
 ```
 
 If no `baseUrl` is provided, it will auto-detect the Git remote and infer a GitHub-compatible link.
@@ -35,13 +35,13 @@ If no `baseUrl` is provided, it will auto-detect the Git remote and infer a GitH
 ### 🔧 Example
 
 ```bash
-tree-links ./src https://github.com/yourname/your-repo/tree/main/src
+tree-me ./src https://github.com/yourname/your-repo/tree/main/src
 ```
 
 Or just:
 
 ```bash
-tree-links ./src
+tree-me ./src
 ```
 
 _(uses git origin URL as base)_
@@ -65,7 +65,7 @@ _(uses git origin URL as base)_
 Tree-links is structured for clean TypeScript CLI builds:
 
 ```
-tree-links/
+tree-me/
 ├── src/
 │   └── index.ts        # Entry point CLI script
 ├── dist/               # Compiled JS output
@@ -85,7 +85,7 @@ npm link
 Then you can run it anywhere:
 
 ```bash
-tree-links ./src
+tree-me ./src
 ```
 
 To publish:
@@ -94,21 +94,6 @@ To publish:
 npm login
 npm publish --access public
 ```
-
----
-
-## 💡 Naming Ideas
-
-If you want something more clever:
-
-- `linkwood` – building links from trees
-- `gh-tree-links` – clearer GitHub intent
-- `branchlink` – plays on git trees + links
-- `trex` – short, fun, “tree explorer”
-
-Let me know if you want to rebrand it — I’ll refactor all CLI references + docs too.
-
----
 
 ## 🧠 Future Enhancements
 
@@ -125,5 +110,3 @@ Let me know if you want to rebrand it — I’ll refactor all CLI references + d
 MIT
 
 ---
-
-Built with ❤️ by Christian Tannahill

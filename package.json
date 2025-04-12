@@ -1,25 +1,46 @@
 {
-  "name": "tree-links",
+  "name": "tree-me",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "description": "Generate a visual tree and GitHub-style link list for any project folder — exports to clean MDX.",
   "bin": {
-    "tree-links": "dist/index.js"
+    "tree-me": "./dist/index.js"
   },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "dev": "ts-node src",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "prepare": "npm run build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "keywords": [
+    "cli",
+    "file-tree",
+    "link-generator",
+    "mdx",
+    "markdown",
+    "documentation",
+    "tree",
+    "github",
+    "project-links",
+    "developer-tools"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cstannahill/tree-me"
+  },
+  "author": "Christian Stannahill",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
-    "@types/node": "^22.14.1",
-    "@types/treeify": "^1.0.3",
-    "chalk": "4.1.2",
-    "commander": "^13.1.0",
-    "simple-git": "^3.27.0",
-    "treeify": "^1.1.0",
-    "typescript": "^5.8.3"
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0",
+    "treeify": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.3.3"
   }
 }

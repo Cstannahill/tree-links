@@ -1,50 +1,34 @@
-// src/commands/default.ts
+import fs from "fs";
 import path from "path";
 import chalk from "chalk";
 import { walkDir } from "../utils/walkDir";
 import { getGitBaseUrl } from "../utils/getGitBaseUrl";
 import { writeOutput } from "../utils/writeOutput";
 
-interface Options {
-  base?: string;
-  out?: string;
-  format?: "txt" | "md" | "mdx" | "json";
-  tree?: boolean;
-  depth?: number;
-}
+export async function handleDefaultCommand(directory = "") {
+  const scanPath = path.resolve(directory || ".");
+  const projectRoot = path.resolve("src");
+  const outputDir = path.join(projectRoot, "docs", "linktree");
 
-export async function handleDefaultCommand(directory = ".", options: Options) {
-  const dirPath = path.resolve(directory);
-  const format = options.format || "txt";
+  console.log(chalk.gray(`📁 Scanning: ${scanPath}`));
 
-  console.log(chalk.gray(`📁 Scanning: ${dirPath}`));
-
-  const files = walkDir(dirPath, options.depth);
+  const entries = walkDir(scanPath, undefined, projectRoot);
+  const files = entries.filter((e) => !e.isDirectory);
   if (files.length === 0) {
     console.log(chalk.yellow("⚠️  No files found."));
     return;
   }
 
-  const baseUrl = options.base || (await getGitBaseUrl(dirPath));
+  const baseUrl = await getGitBaseUrl(scanPath);
   if (!baseUrl) {
     console.log(chalk.red("❌ Could not determine base URL. Use --base."));
     return;
   }
 
-  const links = files.map((file) => `${baseUrl}/${encodeURI(file)}`);
+  const fileLinks = files.map((f) => ({
+    name: f.path.replace(/\\/g, "/"),
+    url: `${baseUrl}/${encodeURI(f.path.replace(/\\/g, "/"))}`,
+  }));
 
-  const outputPath =
-    options.out ||
-    (format === "mdx"
-      ? path.join(dirPath, "docs", "generated-links.mdx")
-      : undefined);
-
-  await writeOutput({
-    links,
-    files,
-    format,
-    outputPath,
-    dirPath,
-    showTree: options.tree,
-  });
+  writeOutput({ fileLinks, outputDir });
 }

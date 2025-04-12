@@ -1,0 +1,46 @@
+# Ignore source TypeScript
+src/
+*.ts
+*.tsx
+
+# Ignore config, local dev, and non-essentials
+.vscode/
+*.md
+README.md
+TODO.md
+node_modules/
+coverage/
+test/
+tests/
+__tests__/
+examples/
+.DS_Store
+.env
+.env.local
+*.log
+*.bak
+
+# Docs output
+docs/
+!docs/linktree/linktree.mdx
+
+# GitHub/workflow files (not needed in package)
+.github/
+
+src/
+.vscode/
+test/
+tests/
+__tests__/
+*.ts
+*.tsx
+*.log
+.DS_Store
+
+# Remove legacy/extra docs
+docs/linktree/linktree.txt
+docs/linktree/linktree.default
+docs/tree/
+
+# GitHub/workflow files
+.github/
