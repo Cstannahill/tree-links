@@ -36,10 +36,12 @@
   "dependencies": {
     "chalk": "^5.3.0",
     "commander": "^11.1.0",
+    "simple-git": "^3.27.0",
     "treeify": "^1.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.8.0",
+    "@types/treeify": "^1.0.3",
     "ts-node": "^10.9.1",
     "typescript": "^5.3.3"
   }
