@@ -1,24 +1,43 @@
-// src/utils/getGitBaseUrl.ts
-import simpleGit from "simple-git";
-import path from "path";
+import { execSync } from "child_process";
+// import { git } from "simple-git";
+import inquirer from "inquirer";
 
-export async function getGitBaseUrl(startPath: string): Promise<string | null> {
-  const git = simpleGit(startPath);
+export async function getOrPromptGitBaseUrl(): Promise<string> {
+  const branch = (
+    await execSync("git rev-parse --abbrev-ref HEAD", {
+      encoding: "utf-8",
+    })
+  ).trim();
 
   try {
-    const root = await git.revparse(["--show-toplevel"]);
-    const remote = await git.remote(["get-url", "origin"]);
-    const branch = (await git.revparse(["--abbrev-ref", "HEAD"])).trim();
-
-    // Convert SSH to HTTPS
-    let base = remote?.trim() || "";
+    const url = execSync("git remote get-url origin", {
+      encoding: "utf-8",
+    }).trim();
+    let base = url?.trim() || "";
     if (base.startsWith("git@")) {
       base = base.replace(":", "/").replace("git@", "https://");
     }
 
     base = base.replace(/\.git$/, ""); // remove .git suffix
-    return `${base}/tree/${branch}`;
+    return `${base}/blob/${branch}`;
   } catch {
-    return null;
+    const { remoteUrl } = await inquirer.prompt([
+      {
+        type: "input",
+        name: "remoteUrl",
+        message:
+          "No Git remote found. Please enter one: Ex https://github.com/Cstannahill/tree-me/tree",
+        validate: (input) => input.trim() !== "" || "Remote URL is required.",
+      },
+    ]);
+    const { branch } = await inquirer.prompt([
+      {
+        type: "input",
+        name: "branch",
+        message: "Enter the branch name:",
+        default: "main",
+      },
+    ]);
+    return `${remoteUrl}/blob/${branch}`;
   }
 }

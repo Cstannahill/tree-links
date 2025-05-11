@@ -44,7 +44,8 @@ export const walkDir = (
       file.startsWith(".") ||
       file === "dist" ||
       file === "package.json" ||
-      file === "package-lock.json"
+      file === "package-lock.json" ||
+      file === "migrations"
     ) {
       continue;
     }

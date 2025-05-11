@@ -13,7 +13,7 @@ interface FileLink {
 export function writeOutput({
   fileLinks,
   outputDir,
-  treeHeader = "# 📁 Project Structure & Links",
+  treeHeader = "# 📁 Project Structure & GitHub Repository Links",
   showTree = true,
 }: {
   fileLinks: FileLink[];
@@ -59,5 +59,51 @@ ${fileLinks.map((f) => `- [${f.name}](${f.url})`).join("\n")}
 `;
 
   fs.writeFileSync(outputPath, mdx, "utf-8");
+  console.log(chalk.green(`\n✅ Output saved to: ${outputPath}`));
+}
+
+export function writeOutputMd({
+  fileLinks,
+  outputDir,
+  treeHeader = "# 📁 Project Structure & GitHub Repository Links",
+  showTree = true,
+}: {
+  fileLinks: FileLink[];
+  outputDir: string;
+  treeHeader?: string;
+  showTree?: boolean;
+}) {
+  const outputPath = path.join(outputDir, "linktree.md");
+  fs.mkdirSync(outputDir, { recursive: true });
+
+  let treeText = "";
+
+  if (showTree) {
+    const tree = {} as Record<string, any>;
+    for (const { name } of fileLinks) {
+      const parts = name.split("/");
+      let current = tree;
+      for (const part of parts) {
+        current[part] = current[part] || {};
+        current = current[part];
+      }
+    }
+    treeText = treeify.asTree(tree, true, false);
+  }
+
+  const md = `${treeHeader}
+---
+## File Tree
+<pre><code>
+${treeText.trim()}
+</code>
+</pre>
+---
+## 🔗 Links
+
+${fileLinks.map((f) => `- [${f.name}](${f.url})`).join("\n")}
+`;
+
+  fs.writeFileSync(outputPath, md, "utf-8");
   console.log(chalk.green(`\n✅ Output saved to: ${outputPath}`));
 }

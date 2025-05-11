@@ -28,14 +28,16 @@
     "type": "git",
     "url": "https://github.com/Cstannahill/tree-me"
   },
-  "author": "Christian Stannahill",
+  "author": "Christian S Tannahill",
   "license": "MIT",
   "engines": {
     "node": ">=18"
   },
   "dependencies": {
     "chalk": "4.1.2",
+    "child_process": "^1.0.2",
     "commander": "^11.1.0",
+    "inquirer": "^12.6.1",
     "simple-git": "^3.27.0",
     "treeify": "^1.1.0"
   },
