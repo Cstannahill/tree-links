@@ -62,7 +62,7 @@ _(uses git origin URL as base)_
 
 ## 🏗️ npm Publishing-Ready Structure
 
-Tree-links is structured for clean TypeScript CLI builds:
+tree-me is structured for clean TypeScript CLI builds:
 
 ```
 tree-me/
@@ -86,13 +86,6 @@ Then you can run it anywhere:
 
 ```bash
 tree-me ./src
-```
-
-To publish:
-
-```bash
-npm login
-npm publish --access public
 ```
 
 ## 🧠 Future Enhancements
